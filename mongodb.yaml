@@ -1,0 +1,27 @@
+- name: mongodb configuration
+  hosts: mongodb.sreeja.site
+  become: yes
+  tasks:
+  - name: adding repo
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  - name: install mongodb
+    ansible.builtin.package:
+      name: mongodb
+      state: present
+  - name: starting and enabling mongodb
+    ansible.builtin.service:
+      name: mongodb
+      state: started
+      enabled: yes
+  - name: allow remote connection
+    ansible.builtin.replace:
+      path: /etc/mongod.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+  - name: restarting mongodb
+    ansible.builtin.service:
+      name: mongodb
+      state: restarted
+      
