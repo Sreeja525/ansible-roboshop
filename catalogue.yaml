@@ -14,13 +14,12 @@
     ansible.builtin.file:
       path: /app  
       state: directory
-      
+
   - name: add app user
     ansible.builtin.user:
       name: roboshop
       shell: /sbin/nologin
-      system: true
-      home: /app
+     
   
   - name: download catalogue code
     ansible.builtin.get_url:
@@ -66,6 +65,14 @@
   - name: load products
     ansible.builtin.shell: mongosh --host mongodb.daws84s.site < /app/db/master-data.js
     when: catalogue_output.stdout | int < 0
+
+  #- name: check user already exist or not
+  #  ansible.builtin.command: id roboshop
+  #  register: user_output
+#
+  #- name: user creation
+  #  ansible.builtin.shell: useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+  #  when: user_output.stdout | int > 0
 
 
 
