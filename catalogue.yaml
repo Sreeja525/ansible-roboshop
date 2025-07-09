@@ -1,5 +1,5 @@
 - name: catalogue configuration
-  hosts: catalogue.sreeja.site
+  hosts: catalogue
   become: yes
   tasks:
   - name: disabling nodejs
@@ -26,6 +26,7 @@
     ansible.builtin.unarchive:
       src: /tmp/catalogue.zip
       dest: /app 
+      remote_src: yes
   - name: install dependencies
     community.general.npm:
       name: npm
