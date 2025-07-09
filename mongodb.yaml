@@ -1,5 +1,5 @@
 - name: mongodb configuration
-  hosts: mongodb.sreeja.site
+  hosts: mongodb
   become: yes
   tasks:
   - name: adding repo
@@ -8,9 +8,9 @@
       dest: /etc/yum.repos.d/mongo.repo
 
   - name: install mongodb
-    ansible.builtin.yum:
+    ansible.builtin.dnf:
       name: mongodb-org
-      state: present
+      state: installed
 
   - name: starting and enabling mongodb
     ansible.builtin.service:
