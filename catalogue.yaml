@@ -37,7 +37,6 @@
       dest: /etc/systemd/system/catalogue.service
   - name: demon reload
     ansible.builtin.systemd_service:
-      name: catalogue
       daemon_reload: true
   - name: start and enable catalogue
     ansible.builtin.service:
@@ -50,7 +49,7 @@
       dest: /etc/yum.repos.d/mongo.repo
   - name: install mongodb
     ansible.builtin.package:
-      name: mongodb
+      name: mongodb-org
       state: present
   - name: load data
     ansible.builtin.shell: mongosh --host mongodb.sreeja.site </app/db/master-data.js
