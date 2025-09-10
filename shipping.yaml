@@ -1,5 +1,6 @@
 - name: shipping component configuration
   hosts: shipping
+  become: yes
   tasks:
   - name: install maven package
     ansible.builtin.dnf:

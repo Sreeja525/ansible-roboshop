@@ -1,5 +1,6 @@
 - name: redis configuration
   hosts: redis.sreeja.site
+  become: yes
   tasks: 
   - name: disable redis version
     ansible.builtin.command: dnf module disable redis -y
